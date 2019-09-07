@@ -40,7 +40,10 @@ public class TimerController : MonoBehaviour
     {
         timeLeft -= Time.deltaTime;
 
-        text.text = $"Time left: {timeLeft}";
+        int minutes = (int)timeLeft / 60;
+        int seconds = (int)timeLeft - minutes * 60;
+
+        text.text = $"Time left: {minutes}:{seconds}";
 
         if (timeLeft < 0 && !timeOver)
         {

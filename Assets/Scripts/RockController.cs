@@ -46,10 +46,10 @@ public class RockController : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"rock collided with {collision.name}");
-        if (collision.tag == "Player" && !goalFound)
+        Debug.Log($"rock collided with {collision.transform.name}");
+        if (collision.gameObject.tag == "Player" && !goalFound)
         {
 
             if (collision.transform.position.x > transform.position.x)
@@ -88,9 +88,45 @@ public class RockController : MonoBehaviour
                     _OnCompleteCallback(3);
                 }
             }
-        }   
+        }
 
-        if (collision.tag == "RockGoal")
+        if (collision.gameObject.tag == "Rock")
+        {
+
+            rb2d.velocity = new Vector2(0, 0);
+
+            if (transform.position.x - (int)transform.position.x != 0.5)
+            {
+                if (transform.position.x - (int)transform.position.x >= 0)
+                {
+                    transform.position = new Vector3((int)transform.position.x + 0.5f, transform.position.y);
+                }
+
+                else if (transform.position.x - (int)transform.position.x < 0)
+                {
+                    transform.position = new Vector3((int)transform.position.x - 0.5f, transform.position.y);
+                }
+            }
+
+            if (transform.position.y - (int)transform.position.y != 0.5)
+            {
+                if (transform.position.y - (int)transform.position.y < 0)
+                {
+                    transform.position = new Vector3(transform.position.x, (int)transform.position.y - 0.5f);
+                }
+
+                else if (transform.position.y - (int)transform.position.y >= 0)
+                {
+                    transform.position = new Vector3(transform.position.x, (int)transform.position.y + 0.5f);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       
+        if (collision.gameObject.tag == "RockGoal")
         {
             transform.position = collision.transform.position;
             rb2d.velocity = new Vector2(0, 0);
@@ -98,7 +134,7 @@ public class RockController : MonoBehaviour
             _ObjectComplete.Invoke(true);
         }
 
-        if (collision.tag == "Ground" || collision.tag == "Rock")
+        if (collision.tag == "Ground")
         {
 
             rb2d.velocity = new Vector2(0,0);

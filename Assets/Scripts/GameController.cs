@@ -19,4 +19,19 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene("GameOver");
     }
+
+    public void GotoStory()
+    {
+        SceneManager.LoadScene("Story");
+    }
+
+    public void GotoFinish()
+    {
+        SceneManager.LoadScene("Finish");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
