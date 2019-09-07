@@ -4,24 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class Room1Door : MonoBehaviour
+public class DoorController : MonoBehaviour
 {
 
     public int Events;
-
-    [System.Serializable]
-    public class BoolUnityEvent : UnityEvent<bool>
-    {
-
-    }
-
-    [SerializeField]
-    private BoolUnityEvent _OnCompleteEvent;
-
-    private void Awake()
-    {
-        _OnCompleteEvent.AddListener(_OnCompleteCallback);
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +18,7 @@ public class Room1Door : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void _OnCompleteCallback(bool success)
+    public void goalUpdate()
     {
         Events--;
         if (Events == 0)

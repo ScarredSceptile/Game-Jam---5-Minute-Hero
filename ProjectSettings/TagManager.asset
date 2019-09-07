@@ -9,6 +9,9 @@ TagManager:
   - Rock
   - Ground
   - RockGoal
+  - Red
+  - Blue
+  - Green
   layers:
   - Default
   - TransparentFX

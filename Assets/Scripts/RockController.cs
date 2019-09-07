@@ -9,20 +9,28 @@ public class RockController : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private bool goalFound;
-    Room1Door door;
 
     [System.Serializable]
-    public class BoolUnityEvent : UnityEvent<int>
+    public class IntUnityEvent : UnityEvent<int>
+    {
+
+    }
+
+    [System.Serializable]
+    public class BoolUnityEvent : UnityEvent<bool>
     {
 
     }
 
     [SerializeField]
-    private BoolUnityEvent _OnCompleteEvent;
+    private IntUnityEvent _OnCompleteEvent;
+    [SerializeField]
+    private BoolUnityEvent _ObjectComplete;
 
     private void Awake()
     {
         _OnCompleteEvent.AddListener(_OnCompleteCallback);
+        _ObjectComplete.AddListener(_OnCompleteObject);
     }
 
     // Start is called before the first frame update
@@ -30,7 +38,6 @@ public class RockController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         goalFound = false;
-        door = FindObjectOfType<Room1Door>();
     }
 
     // Update is called once per frame
@@ -88,7 +95,7 @@ public class RockController : MonoBehaviour
             transform.position = collision.transform.position;
             rb2d.velocity = new Vector2(0, 0);
             goalFound = true;
-            door._OnCompleteCallback(goalFound);
+            _ObjectComplete.Invoke(true);
         }
 
         if (collision.tag == "Ground" || collision.tag == "Rock")
@@ -147,5 +154,10 @@ public class RockController : MonoBehaviour
 
             default: break;
         }
+    }
+
+    private void _OnCompleteObject (bool success)
+    {
+
     }
 }
