@@ -8,6 +8,7 @@ public class RockController : MonoBehaviour
 {
 
     private Rigidbody2D rb2d;
+    private AudioSource sound;
     private bool goalFound;
 
     [System.Serializable]
@@ -38,6 +39,7 @@ public class RockController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         goalFound = false;
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -94,6 +96,7 @@ public class RockController : MonoBehaviour
         {
 
             rb2d.velocity = new Vector2(0, 0);
+            sound.Stop();
 
             if (transform.position.x - (int)transform.position.x != 0.5)
             {
@@ -130,6 +133,7 @@ public class RockController : MonoBehaviour
         {
             transform.position = collision.transform.position;
             rb2d.velocity = new Vector2(0, 0);
+            sound.Stop();
             goalFound = true;
             _ObjectComplete.Invoke(true);
         }
@@ -138,6 +142,7 @@ public class RockController : MonoBehaviour
         {
 
             rb2d.velocity = new Vector2(0,0);
+            sound.Stop();
 
             if (transform.position.x - (int)transform.position.x != 0.5)
             {
@@ -174,18 +179,22 @@ public class RockController : MonoBehaviour
         {
             case 0:
                 rb2d.velocity = new Vector2(0,-10);
+                sound.Play();
                 break;
 
             case 1:
                 rb2d.velocity = new Vector2(0, 10);
+                sound.Play();
                 break;
 
             case 2:
                 rb2d.velocity = new Vector2(-10, 0);
+                sound.Play();
                 break;
 
             case 3:
                 rb2d.velocity = new Vector2(10, 0);
+                sound.Play();
                 break;
 
             default: break;

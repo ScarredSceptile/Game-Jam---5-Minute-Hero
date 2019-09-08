@@ -33,6 +33,7 @@ public class TimerController : MonoBehaviour
     {
         text = GetComponent<Text>();
         timeOver = false;
+        text.transform.position = new Vector3(1222, Screen.height - 100);
     }
 
     // Update is called once per frame
@@ -44,6 +45,8 @@ public class TimerController : MonoBehaviour
         int seconds = (int)timeLeft - minutes * 60;
 
         text.text = $"Time left: {minutes}:{seconds}";
+
+        text.transform.position = new Vector3(Screen.width - 100, Screen.height - 50);
 
         if (timeLeft < 0 && !timeOver)
         {

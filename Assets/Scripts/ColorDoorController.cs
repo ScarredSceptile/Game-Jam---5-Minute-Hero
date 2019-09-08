@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ColorDoorController : MonoBehaviour
 {
+
     public void ButtonPressed(string color)
     {
         if (color == transform.tag)
